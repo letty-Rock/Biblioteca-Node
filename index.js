@@ -1,11 +1,29 @@
-const chalk = require('chalk');
-const fs = require('fs');
+
+import chalk from 'chalk';
+import fs  from 'fs';
+
+function extraiLinks(texto) {
+    const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
+    const arrayResultados = [];
+    let temp;
+    while((temp = regex.exec(texto)) !== null) {
+        arrayResultados.push({ [temp[1]]: temp[2]})
+    }
+    return arrayResultados;
+}
 
 
-function pegaArquivo(caminhoDoArquivo) {
+function trataErro(erro) {
+    throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'));
+}
 
- fs.readFile(caminhoDoArquivo, encoding, (_, texto) =>{
-     console.log(chalk.green(texto));
- })
+async function pegaArquivo(caminhoDoArquivo) {
+ const encoding = 'utf-8';
+ try{ //try não tem condição mas o catch sim
+     const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
+     console.log(extraiLinks(texto));
+ } catch(erro){
+     trataErro(erro);
+ }
 }
 pegaArquivo('./arquivos/texto1.md');
