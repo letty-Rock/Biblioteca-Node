@@ -1,9 +1,11 @@
 const chalk = require('chalk');
+const fs = require('fs');
 
-console.log(chalk.blue('Bem vindos'));
 
-const paragrafo = 'Texto retornado por uma função';
-function texto(string) {
-    return string;
+function pegaArquivo(caminhoDoArquivo) {
+
+ fs.readFile(caminhoDoArquivo, encoding, (_, texto) =>{
+     console.log(chalk.green(texto));
+ })
 }
-console.log(texto(paragrafo));
+pegaArquivo('./arquivos/texto1.md');

@@ -19,5 +19,6 @@
   "homepage": "https://github.com/letty-Rock/Biblioteca-Node#readme",
   "dependencies": {
     "chalk": "^5.0.0"
-  }
+  },
+  "type":"module"
 }
