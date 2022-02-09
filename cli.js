@@ -1,6 +1,7 @@
-const chalk = require('chalk');
-const pegaArquivo = require('./index');
-const validaURLs = require('./http-validacao');
+
+import chalk from 'chalk';
+import pegaArquivo from './index';
+import validaURLs from './http-validacao';
 
 const caminho = process.argv;
 

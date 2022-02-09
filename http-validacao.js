@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 function manejaErros(erro) {
     throw new Error(erro.message);
@@ -8,7 +8,7 @@ async function checaStatus(arrayURLs) {
     try {
         const arrayStatus = await Promise
         .all(arrayURLs
-            .map(assync url => {
+            .map(async url => {
             const res = await fetch(url)
             return res.status;
         }))
@@ -17,13 +17,13 @@ async function checaStatus(arrayURLs) {
         manejaErros(erro);
     }
 }
-function geraArrayDdeURLs(arrayLinks) {
+function geraArrayDeURLs(arrayLinks) {
     return arrayLinks
      .map(objetoLink => Object
         .values(objetoLink).join());
 }
  async function validaURLs(arrayLinks) {
-     const links = geraArrayDdeURLs(arrayLinks);
+     const links = geraArrayDeURLs(arrayLinks);
      const statusLinks = await checaStatus(links);
 
      const resultados = arrayLinks.map((objeto, indice) => ({
@@ -32,5 +32,4 @@ function geraArrayDdeURLs(arrayLinks) {
      }))
      return resultados;
  }
-
- module.exports = validaURLs;
+ export default validaURLs;

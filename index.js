@@ -1,4 +1,3 @@
-
 import chalk from 'chalk';
 import fs  from 'fs';
 
@@ -9,7 +8,7 @@ function extraiLinks(texto) {
     while((temp = regex.exec(texto)) !== null) {
         arrayResultados.push({ [temp[1]]: temp[2]})
     }
-    return arrayResultados;
+    return arrayResultados.length === 0 ? 'não há links': arrayResultados;
 }
 
 
@@ -21,9 +20,9 @@ async function pegaArquivo(caminhoDoArquivo) {
  const encoding = 'utf-8';
  try{ //try não tem condição mas o catch sim
      const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
-     console.log(extraiLinks(texto));
+     return extraiLinks(texto);
  } catch(erro){
      trataErro(erro);
  }
 }
-module.exports = pegaArquivo;
+export default pegaArquivo;
